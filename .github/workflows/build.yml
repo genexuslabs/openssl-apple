@@ -27,7 +27,7 @@ jobs:
       run: sh ./create-openssl-framework.sh dynamic
 
     - name: Sign XCFramework
-      run: sh ./sign-openssl-framework.sh  ${{ secrets.APPLE_SIGNING_CONFIGURATION }} ./frameworks/openssl.xcframework
+      run: sh ./sign-xcframework.sh  ${{ secrets.APPLE_SIGNING_CONFIGURATION }} ./frameworks/openssl.xcframework
 
     - name: Zip XCFramework
       run: ditto -c -k -X -rsrc --keepParent ./frameworks/openssl.xcframework ./frameworks/openssl.xcframework.zip
