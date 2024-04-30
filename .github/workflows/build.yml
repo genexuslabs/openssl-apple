@@ -18,13 +18,16 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Build archs
       run: sh ./build-libssl.sh --cleanup --verbose-on-error
 
     - name: Package XCFramework
       run: sh ./create-openssl-framework.sh dynamic
+
+    - name: Sign XCFramework
+      run: sh ./sign-openssl-framework.sh  ${{ secrets.APPLE_SIGNING_CONFIGURATION }} ./frameworks/openssl.xcframework
 
     - name: Zip XCFramework
       run: ditto -c -k -X -rsrc --keepParent ./frameworks/openssl.xcframework ./frameworks/openssl.xcframework.zip

@@ -196,6 +196,7 @@ if [ $FWTYPE == "dynamic" ]; then
             lipo -create ${DYLIBS[@]} -output $FWDIR/$FWNAME
             cp -r include/$FWNAME/* $FWDIR/Headers/
             cp -L assets/$SYS/Info.plist $FWDIR/Info.plist
+            cp PrivacyInfo.xcprivacy $FWDIR/
             MIN_SDK_VERSION=$(get_min_sdk "$FWDIR/$FWNAME")
             OPENSSL_VERSION=$(get_openssl_version "$FWDIR/Headers/opensslv.h")
             sed -e "s/\\\$(MIN_SDK_VERSION)/$MIN_SDK_VERSION/g" \
@@ -226,6 +227,7 @@ else
             mkdir -p $FWDIR/Headers
             cp -r include/$FWNAME/* $FWDIR/Headers/
             cp -L assets/$SYS/Info.plist $FWDIR/Info.plist
+            cp PrivacyInfo.xcprivacy $FWDIR/
             MIN_SDK_VERSION=$(get_min_sdk "$FWDIR/$FWNAME")
             OPENSSL_VERSION=$(get_openssl_version "$FWDIR/Headers/opensslv.h")
             sed -e "s/\\\$(MIN_SDK_VERSION)/$MIN_SDK_VERSION/g" \
